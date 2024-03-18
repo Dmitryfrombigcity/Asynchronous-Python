@@ -1,0 +1,106 @@
+
+Создание Task-2, Task-3
+##################################################
+asyncio.get_running_loop()._ready = deque([<Handle <TaskStepMethWrapper object at 0x7fc392af0220>()>,
+                                           <Handle <TaskStepMethWrapper object at 0x7fc392af0dc0>()>])
+--------------------------------------------------
+asyncio.get_running_loop()._scheduled = []
+--------------------------------------------------
+<Task pending name='Task-1' coro=<main() > cb=[_run_until_complete_cb()]>
+<Task pending name='Task-2' coro=<coro() >
+<Task pending name='Task-3' coro=<coro() >
+##################################################
+
+Задача 2 запустилась, будет работать 2 сек.
+##################################################
+asyncio.get_running_loop()._ready = deque([<Handle <TaskStepMethWrapper object at 0x7fc392af0dc0>()>])
+--------------------------------------------------
+asyncio.get_running_loop()._scheduled = []
+--------------------------------------------------
+<Task pending name='Task-1' coro=<main() > wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()]>
+                                                                       cb=[_run_until_complete_cb() ]>
+<Task pending name='Task-2' coro=<coro() > cb=[gather.<locals>._done_callback() >
+<Task pending name='Task-3' coro=<coro()  cb=[gather.<locals>._done_callback() >
+##################################################
+
+Задача 3 запустилась, будет работать 3 сек.
+##################################################
+asyncio.get_running_loop()._ready = deque([])
+--------------------------------------------------
+asyncio.get_running_loop()._scheduled = [<TimerHandle when=1474565.407925811
+    _set_result_unless_cancelled(<Future pendi...ask_wakeup()]>, None) >]
+--------------------------------------------------
+<Task pending name='Task-1' coro=<main() > wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()]>
+                                                                       cb=[_run_until_complete_cb() ]>
+<Task pending name='Task-2' coro=<coro() > wait_for=<Future pending cb=[Task.task_wakeup()]>
+                                                      cb=[gather.<locals>._done_callback() >
+<Task pending name='Task-3' coro=<coro() > cb=[gather.<locals>._done_callback() >
+##################################################
+
+Задача 2 завершилась после 2 сек.
+##################################################
+asyncio.get_running_loop()._ready = deque([])
+--------------------------------------------------
+asyncio.get_running_loop()._scheduled = [<TimerHandle when=1474566.408098156
+       _set_result_unless_cancelled(<Future pendi...ask_wakeup()]>, None) >]
+--------------------------------------------------
+<Task pending name='Task-1' coro=<main() > wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()]>
+                                                                       cb=[_run_until_complete_cb() ]>
+<Task pending name='Task-2' coro=<coro() > cb=[gather.<locals>._done_callback() >
+<Task pending name='Task-3' coro=<coro() > wait_for=<Future pending cb=[Task.task_wakeup()]>
+                                                       cb=[gather.<locals>._done_callback() >
+##################################################
+
+Задача 3 завершилась после 3 сек.
+##################################################
+asyncio.get_running_loop()._ready = deque([])
+--------------------------------------------------
+asyncio.get_running_loop()._scheduled = []
+--------------------------------------------------
+<Task pending name='Task-1' coro=<main() > wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()]>
+                                                                       cb=[_run_until_complete_cb() ]>
+<Task pending name='Task-3' coro=<coro() > cb=[gather.<locals>._done_callback() >
+##################################################
+
+Создание Task-4, Task-6
+##################################################
+asyncio.get_running_loop()._ready = deque([<Handle <TaskStepMethWrapper object at 0x7fc392af3b20>()>,
+                                           <Handle <TaskStepMethWrapper object at 0x7fc392af3b80>()>])
+--------------------------------------------------
+asyncio.get_running_loop()._scheduled = []
+--------------------------------------------------
+<Task pending name='Task-1' coro=<main() > cb=[_run_until_complete_cb() ]>
+<Task pending name='Task-4' coro=<coro_extra() >
+<Task pending name='Task-6' coro=<coro() >
+##################################################
+
+Задача 4 запустилась, будет работать 4 сек.
+Создание Task-5
+##################################################
+asyncio.get_running_loop()._ready = deque([<Handle <TaskStepMethWrapper object at 0x7fc392af3b80>()>,
+                                       <Handle _run_until_complete_cb(<Task finishe...> result=None>),
+                                       <Handle <TaskStepMethWrapper object at 0x7fc392af3b50>()>])
+--------------------------------------------------
+asyncio.get_running_loop()._scheduled = []
+--------------------------------------------------
+<Task pending name='Task-5' coro=<coro() >
+<Task pending name='Task-4' coro=<coro_extra() >
+<Task pending name='Task-6' coro=<coro() >
+##################################################
+
+Задача 6 запустилась, будет работать 6 сек.
+##################################################
+asyncio.get_running_loop()._ready = deque([<Handle _run_until_complete_cb(<Task finishe...> result=None>) >,
+                                                 <Handle <TaskStepMethWrapper object at 0x7fc392af3b50>()>])
+--------------------------------------------------
+asyncio.get_running_loop()._scheduled = [<TimerHandle when=1474570.410347968
+        _set_result_unless_cancelled(<Future pendi...ask_wakeup()]>, None) >]
+--------------------------------------------------
+<Task pending name='Task-5' coro=<coro() >
+<Task pending name='Task-4' coro=<coro_extra() > wait_for=<Future pending cb=[Task.task_wakeup()]>>
+<Task pending name='Task-6' coro=<coro() >>
+##################################################
+
+Конец
+
+
