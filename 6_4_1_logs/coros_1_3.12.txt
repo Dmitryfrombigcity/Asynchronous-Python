@@ -1,0 +1,25 @@
+"/home/me/PycharmProjects/Asynchronous Python/.venv_12/bin/python" /home/me/PycharmProjects/Asynchronous Python/6.4.1.py 
+######################### Before first switch
+<Task pending name='Task-1' coro=<main() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:33> cb=[_run_until_complete_cb() at /usr/lib/python3.12/asyncio/base_events.py:181]>
+
+######################### After first switch
+<Task pending name='Task-1' coro=<main() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:36> cb=[_run_until_complete_cb() at /usr/lib/python3.12/asyncio/base_events.py:181]>
+
+######################### Await tasks
+######################### Задача Task-1 запустилась
+<Task pending name='Task-1' coro=<main() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:42> cb=[_run_until_complete_cb() at /usr/lib/python3.12/asyncio/base_events.py:181]>
+
+######################### Задача Task-1 завершилась
+<Task pending name='Task-1' coro=<main() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:42> cb=[_run_until_complete_cb() at /usr/lib/python3.12/asyncio/base_events.py:181]>
+
+######################### Задача Task-1 запустилась
+<Task pending name='Task-1' coro=<main() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:42> cb=[_run_until_complete_cb() at /usr/lib/python3.12/asyncio/base_events.py:181]>
+
+######################### Задача Task-1 завершилась
+<Task pending name='Task-1' coro=<main() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:42> cb=[_run_until_complete_cb() at /usr/lib/python3.12/asyncio/base_events.py:181]>
+
+######################### Finished tasks=
+<Task pending name='Task-1' coro=<main() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:43> cb=[_run_until_complete_cb() at /usr/lib/python3.12/asyncio/base_events.py:181]>
+3.0043621538206935
+
+Process finished with exit code 0

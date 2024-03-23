@@ -1,0 +1,49 @@
+"/home/me/PycharmProjects/Asynchronous Python/.venv/bin/python" /home/me/PycharmProjects/Asynchronous Python/6.4.1.py 
+######################### Before first switch
+<Task pending name='Task-1' coro=<main() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:33> cb=[_run_until_complete_cb() at /usr/lib/python3.11/asyncio/base_events.py:181]>
+<Task pending name='Task-2' coro=<wait_for() running at /usr/lib/python3.11/asyncio/tasks.py:436>>
+<Task pending name='Task-3' coro=<wait_for() running at /usr/lib/python3.11/asyncio/tasks.py:436>>
+
+######################### After first switch
+<Task pending name='Task-3' coro=<wait_for() running at /usr/lib/python3.11/asyncio/tasks.py:476> wait_for=<Future pending cb=[Task.task_wakeup()]>>
+<Task pending name='Task-4' coro=<my_coroutine() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:5> cb=[_release_waiter(<Future pendi...ask_wakeup()]>)() at /usr/lib/python3.11/asyncio/tasks.py:431]>
+<Task pending name='Task-2' coro=<wait_for() running at /usr/lib/python3.11/asyncio/tasks.py:476> wait_for=<Future pending cb=[Task.task_wakeup()]>>
+<Task pending name='Task-1' coro=<main() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:36> cb=[_run_until_complete_cb() at /usr/lib/python3.11/asyncio/base_events.py:181]>
+<Task pending name='Task-5' coro=<my_coroutine() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:5> cb=[_release_waiter(<Future pendi...ask_wakeup()]>)() at /usr/lib/python3.11/asyncio/tasks.py:431]>
+
+######################### Await tasks
+######################### Задача Task-4 запустилась
+<Task pending name='Task-3' coro=<wait_for() running at /usr/lib/python3.11/asyncio/tasks.py:476> wait_for=<Future pending cb=[Task.task_wakeup()]>>
+<Task pending name='Task-4' coro=<my_coroutine() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:6> cb=[_release_waiter(<Future pendi...ask_wakeup()]>)() at /usr/lib/python3.11/asyncio/tasks.py:431]>
+<Task pending name='Task-2' coro=<wait_for() running at /usr/lib/python3.11/asyncio/tasks.py:476> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[Task.task_wakeup()]>
+<Task pending name='Task-1' coro=<main() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:42> wait_for=<Task pending name='Task-2' coro=<wait_for() running at /usr/lib/python3.11/asyncio/tasks.py:476> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[Task.task_wakeup()]> cb=[_run_until_complete_cb() at /usr/lib/python3.11/asyncio/base_events.py:181]>
+<Task pending name='Task-5' coro=<my_coroutine() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:5> cb=[_release_waiter(<Future pendi...ask_wakeup()]>)() at /usr/lib/python3.11/asyncio/tasks.py:431]>
+
+######################### Задача Task-5 запустилась
+<Task pending name='Task-3' coro=<wait_for() running at /usr/lib/python3.11/asyncio/tasks.py:476> wait_for=<Future pending cb=[Task.task_wakeup()]>>
+<Task pending name='Task-4' coro=<my_coroutine() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:9> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[_release_waiter(<Future pendi...ask_wakeup()]>)() at /usr/lib/python3.11/asyncio/tasks.py:431]>
+<Task pending name='Task-2' coro=<wait_for() running at /usr/lib/python3.11/asyncio/tasks.py:476> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[Task.task_wakeup()]>
+<Task pending name='Task-1' coro=<main() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:42> wait_for=<Task pending name='Task-2' coro=<wait_for() running at /usr/lib/python3.11/asyncio/tasks.py:476> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[Task.task_wakeup()]> cb=[_run_until_complete_cb() at /usr/lib/python3.11/asyncio/base_events.py:181]>
+<Task pending name='Task-5' coro=<my_coroutine() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:6> cb=[_release_waiter(<Future pendi...ask_wakeup()]>)() at /usr/lib/python3.11/asyncio/tasks.py:431]>
+
+######################### Задача Task-4 завершилась
+<Task pending name='Task-3' coro=<wait_for() running at /usr/lib/python3.11/asyncio/tasks.py:476> wait_for=<Future pending cb=[Task.task_wakeup()]>>
+<Task pending name='Task-4' coro=<my_coroutine() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:10> cb=[_release_waiter(<Future pendi...ask_wakeup()]>)() at /usr/lib/python3.11/asyncio/tasks.py:431]>
+<Task pending name='Task-2' coro=<wait_for() running at /usr/lib/python3.11/asyncio/tasks.py:476> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[Task.task_wakeup()]>
+<Task pending name='Task-1' coro=<main() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:42> wait_for=<Task pending name='Task-2' coro=<wait_for() running at /usr/lib/python3.11/asyncio/tasks.py:476> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[Task.task_wakeup()]> cb=[_run_until_complete_cb() at /usr/lib/python3.11/asyncio/base_events.py:181]>
+<Task pending name='Task-5' coro=<my_coroutine() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:9> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[_release_waiter(<Future pendi...ask_wakeup()]>)() at /usr/lib/python3.11/asyncio/tasks.py:431]>
+
+######################### Задача Task-5 завершилась
+<Task pending name='Task-3' coro=<wait_for() running at /usr/lib/python3.11/asyncio/tasks.py:476> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[Task.task_wakeup()]>
+<Task pending name='Task-5' coro=<my_coroutine() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:10> cb=[_release_waiter(<Future pendi...ask_wakeup()]>)() at /usr/lib/python3.11/asyncio/tasks.py:431]>
+<Task pending name='Task-1' coro=<main() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:42> wait_for=<Task pending name='Task-3' coro=<wait_for() running at /usr/lib/python3.11/asyncio/tasks.py:476> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[Task.task_wakeup()]> cb=[_run_until_complete_cb() at /usr/lib/python3.11/asyncio/base_events.py:181]>
+
+######################### Finished tasks=
+<Task finished name='Task-3' coro=<wait_for() done, defined at /usr/lib/python3.11/asyncio/tasks.py:436> result=2>
+<Task finished name='Task-4' coro=<my_coroutine() done, defined at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:5> result=1>
+<Task finished name='Task-2' coro=<wait_for() done, defined at /usr/lib/python3.11/asyncio/tasks.py:436> result=1>
+<Task pending name='Task-1' coro=<main() running at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:43> cb=[_run_until_complete_cb() at /usr/lib/python3.11/asyncio/base_events.py:181]>
+<Task finished name='Task-5' coro=<my_coroutine() done, defined at /home/me/PycharmProjects/Asynchronous Python/6.4.1.py:5> result=2>
+2.0038329479284585
+
+Process finished with exit code 0
