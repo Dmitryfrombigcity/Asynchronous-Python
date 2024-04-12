@@ -3,7 +3,7 @@ import csv
 import json
 from pathlib import Path
 from time import perf_counter, sleep
-from typing import Type
+from typing import Type, Mapping
 
 import aiocsv
 import aiofiles
@@ -33,51 +33,59 @@ def load_file(url: str) -> Type[csv.Dialect]:
         return csv.Sniffer().sniff(test)
 
 
-async def convert(queue: asyncio.Queue) -> None:
+async def convert_mod(queue: asyncio.Queue[Mapping[str, str]]) -> None:
     """
     Берём данные из очереди и записываем их в json-файл.
     Создаётся файл Path.cwd()/10_9_5/file.json,
     если файл уже существует, он пересоздаётся.
-    Время работы 1550 сек.
+    Время работы 180 сек.
     :param queue: Очередь из которой поступают данные.
     """
     if path_json.exists():
         path_json.unlink()
     path_json.touch()
     while True:
+        items = json.dumps(
+            [await queue.get()],
+            ensure_ascii=False,
+            indent=4
+        )
+        queue.task_done()
         with open(path_json, 'r+') as file:
-            if not path_json.stat().st_size:
-                items = [await queue.get()]
-            else:
-                items = [*json.load(file), await queue.get()]
-            file.seek(0)
-            json.dump(items, file, ensure_ascii=False, indent=4)
-            queue.task_done()
-
-
-async def convert_mod(queue: asyncio.Queue) -> None:
-    """
-    Берём данные из очереди и записываем их в json-файл.
-    Создаётся файл Path.cwd()/10_9_5/file.json,
-    если файл уже существует, он пересоздаётся.
-    Время работы 190 сек.
-    :param queue: Очередь из которой поступают данные.
-    """
-    if path_json.exists():
-        path_json.unlink()
-    path_json.touch()
-    while True:
-        with open(path_json, 'r+') as file:
-            items = json.dumps(
-                [await queue.get()],
-                ensure_ascii=False,
-                indent=4
-            )
             if path_json.stat().st_size:
                 items = f'{file.read()[:-2]},{items[1:]}'
                 file.seek(0)
             file.write(items)
+
+
+async def convert_mod_2(queue: asyncio.Queue[Mapping[str, str]]) -> None:
+    """
+    Берём агрегированные данные из очереди и записываем их в json-файл.
+    Создаётся файл Path.cwd()/10_9_5/file.json,
+    если файл уже существует, он пересоздаётся.
+    Время работы 3 сек.
+    :param queue: Очередь из которой поступают данные.
+    """
+    if path_json.exists():
+        path_json.unlink()
+    path_json.touch()
+    while True:
+        chunk: list[Mapping[str, str]] = []
+        while True:
+            chunk.append(await queue.get())
             queue.task_done()
+            if queue.empty():
+                break
+        items = json.dumps(
+            chunk,
+            ensure_ascii=False,
+            indent=4
+        )
+        with open(path_json, 'r+') as file:
+            if path_json.stat().st_size:
+                items = f'{file.read()[:-2]},{items[1:]}'
+                file.seek(0)
+            file.write(items)
 
 
 def send_result(
@@ -96,7 +104,7 @@ def send_result(
     options.add_argument('--window-size=1920,1080')
 
     with webdriver.Chrome(options=options) as driver:
-        wait = WebDriverWait(driver, 15)
+        wait = WebDriverWait(driver, 30)
 
         driver.get(validation)
         wait.until(
@@ -128,13 +136,13 @@ async def main(dialect: Type[csv.Dialect]) -> None:
     Когда все данные считаны, закрываем задачу.
     :param dialect: Диалект csv-файла.
     """
-    queue = asyncio.Queue()
-    task = asyncio.create_task(convert_mod(queue))
+    queue: asyncio.Queue[Mapping[str, str]] = asyncio.Queue()
+    task = asyncio.create_task(convert_mod_2(queue))
     async with aiofiles.open(path_csv) as file:
         async_reader = aiocsv.AsyncDictReader(file, dialect=dialect)
         async for item in async_reader:
             await queue.put(item)
-            print(queue.qsize())  # показывает как живёт очередь
+            # print(queue.qsize())  # показывает как живёт очередь
         await queue.join()
         task.cancel()
 
