@@ -23,10 +23,10 @@ async def coro(file: Path) -> int:
         return int(string.strip())
 
 
-async def main() -> int:
+async def main(sub_dir: str) -> int:
     results: list[asyncio.Task[Any]] = []
     async with asyncio.TaskGroup() as gr:
-        for file in Path('10_9_3').rglob("*.csv"):
+        for file in Path(sub_dir).rglob("*.csv"):
             results.append(gr.create_task(coro(file)))
     return sum(map(lambda x: x.result(), results))
 
@@ -35,11 +35,12 @@ if __name__ == '__main__':
     start = perf_counter()
     stepic = 'https://stepik.org/lesson/1029069/step/3?unit=1037339'
     url = 'https://parsinger.ru/asyncio_course/5000csv.zip'
+    sub_dir = '10_9_3'
     response = requests.get(url)
     with zipfile.ZipFile(io.BytesIO(response.content), 'r') as zf:
-        zf.extractall(path='10_9_3')
+        zf.extractall(path=sub_dir)
 
-    result = asyncio.run(main())
+    result = asyncio.run(main(sub_dir))
 
     print(perf_counter() - start)
     send_result(result, stepic)
